@@ -34,6 +34,30 @@ Node *addNode(int data)
     return new;
 }
 
+int removeNode(int data)
+{
+    Node *current = head;
+    Node *prev = head;
+    while (current != NULL)
+    {
+        if (current->data == data)
+        {
+            if (current == head)
+            {
+                head = current->next;
+            } else {
+                prev->next = current->next;
+            }
+
+            return 1;
+        }
+        prev = current;
+        current = current->next;
+    }
+
+    return 0;
+}
+
 void printList()
 {
     Node *current = head;
@@ -73,6 +97,9 @@ int main()
                     addNode(option);
                     break;
                 case 2:
+                    printf("Input data:");
+                    scanf("%d", &option);
+                    removeNode(option);
                     break;
                 case 3:
                     break;
