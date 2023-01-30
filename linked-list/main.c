@@ -58,6 +58,36 @@ int removeNode(int data)
     return 0;
 }
 
+int insertNode(int afterData, int dataToInsert)
+{
+    Node *current = head;
+    Node *new = malloc(sizeof (Node));
+    if (new == NULL)
+        return -1;
+
+    new->data = dataToInsert;
+
+    while (current != NULL)
+    {
+        if (current->data == afterData)
+        {
+            if (current->next == NULL)
+            {
+                current->next = new;
+                new->next = NULL;
+            } else {
+                new->next = current->next;
+                current->next = new;
+            }
+
+            return 1;
+        }
+        current = current->next;
+    }
+
+    return 0;
+}
+
 void printList()
 {
     Node *current = head;
@@ -90,23 +120,28 @@ int main()
         int num_received = scanf("%d", &option);
         if (num_received == 1 && option > 0 && option <= 4)
         {
+            int data;
             switch (option) {
                 case 1:
                     printf("Input data:");
-                    scanf("%d", &option);
-                    addNode(option);
+                    scanf("%d", &data);
+                    addNode(data);
                     break;
                 case 2:
                     printf("Input data:");
-                    scanf("%d", &option);
-                    removeNode(option);
+                    scanf("%d", &data);
+                    removeNode(data);
                     break;
                 case 3:
+                    printf("Input after data to insert:");
+                    scanf("%d", &data);
+                    int dataToInsert;
+                    printf("Input data to insert:");
+                    scanf("%d", &dataToInsert);
+                    insertNode(data, dataToInsert);
                     break;
                 case 4:
                     printList();
-                    break;
-                case 5:
                     break;
             }
         }
